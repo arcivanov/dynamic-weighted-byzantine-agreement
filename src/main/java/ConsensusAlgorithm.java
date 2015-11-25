@@ -197,6 +197,10 @@ public class ConsensusAlgorithm {
     }
 
     public final void setNodeValue(int nodeId, Value nodeValue) {
+        if (values[nodeId] != null) {
+            throw new IllegalStateException("Attempting to overwrite value " + values[nodeId] + " with value "
+                    + nodeValue + " on node " + nodeId);
+        }
         values[nodeId] = nodeValue;
         valuesSemaphore.release();
     }

@@ -38,7 +38,6 @@ public class TESTIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void testValidLookupQueen() throws Exception {
         String name = "10.0.0.1/8";
         String expectedResponse = client.responses.get("TRUE");
@@ -57,7 +56,6 @@ public class TESTIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void testValidLookupKing() throws Exception {
         for(int i = 0; i < numNodes; i ++) {
             nodeList.get(i).node.queenAlgorithm = false;
