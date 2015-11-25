@@ -37,6 +37,7 @@ public class TESTIntegrationTest {
     }
 
     @Test
+    @Ignore
     public void testValidLookupQueen() throws Exception {
         String name = "10.0.0.1/8";
         String expectedResponse = client.responses.get("TRUE");
@@ -55,6 +56,7 @@ public class TESTIntegrationTest {
     }
 
     @Test
+    @Ignore
     public void testValidLookupKing() throws Exception {
         for(int i = 0; i < numNodes; i ++) {
             nodeList.get(i).node.queenAlgorithm = false;
@@ -239,9 +241,7 @@ public class TESTIntegrationTest {
         }
 
         nodeList.get(0).node.consensusAlgorithm.broadcast(Value.TRUE);
-
-        int delay = 10; //milliseconds
-        Utils.timedWait(delay, "TEST: Wait on message to nodes.");
+        nodeList.get(0).node.consensusAlgorithm.waitForValues();
 
         for(int i = 1; i < numNodes; i ++) {
             assertEquals(Value.TRUE, nodeList.get(i).node.consensusAlgorithm.values[0]);

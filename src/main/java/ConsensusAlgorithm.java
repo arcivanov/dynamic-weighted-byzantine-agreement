@@ -186,7 +186,7 @@ public class ConsensusAlgorithm {
         return values[currentRound];
     }
 
-    protected final void waitForValues() {
+    public final void waitForValues() {
         try {
             if(!valuesSemaphore.tryAcquire(N, Constants.VALUE_TIMEOUT, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException(new TimeoutException());
