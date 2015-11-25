@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -241,9 +242,9 @@ public class TESTIntegrationTest {
         }
 
         nodeList.get(0).node.consensusAlgorithm.broadcast(Value.TRUE);
-        nodeList.get(0).node.consensusAlgorithm.waitForValues();
 
         for(int i = 1; i < numNodes; i ++) {
+            assertTrue(nodeList.get(i).node.consensusAlgorithm.valuesSemaphore.tryAcquire(Constants.VALUE_TIMEOUT, TimeUnit.MILLISECONDS));
             assertEquals(Value.TRUE, nodeList.get(i).node.consensusAlgorithm.values[0]);
         }
     }

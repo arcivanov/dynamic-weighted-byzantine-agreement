@@ -24,7 +24,7 @@ public class ConsensusAlgorithm {
     // Proposed value
     public Value V;
 
-    private final Semaphore valuesSemaphore;
+    final Semaphore valuesSemaphore;
 
     // Received values
     final Value[] values;
@@ -188,7 +188,7 @@ public class ConsensusAlgorithm {
 
     public final void waitForValues() {
         try {
-            if(!valuesSemaphore.tryAcquire(N, Constants.VALUE_TIMEOUT, TimeUnit.MILLISECONDS)) {
+            if(!valuesSemaphore.tryAcquire(N - 1, Constants.VALUE_TIMEOUT, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException(new TimeoutException());
             }
         } catch (InterruptedException e) {
