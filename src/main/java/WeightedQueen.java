@@ -40,11 +40,6 @@ public class WeightedQueen extends ConsensusAlgorithm {
             V = Value.FALSE;
             myWeight = s0;
         }
-
-        if(countNullValues() > 0) {
-            MsgHandler.debug("Node " + i  + " has null values " + Arrays.toString(values));
-        }
-
     }
 
     @Override
